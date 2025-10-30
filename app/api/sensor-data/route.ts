@@ -1,8 +1,24 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { verifyApiKey } from "@/lib/api/auth-middleware"
 import { insertSensorData, getSensorData, getLatestSensorData } from "@/lib/mongodb/queries"
+import mongoose from "mongoose";
+
+const MONGODB_URI = process.env.MONGODB_URI!;
+
+if (!MONGODB_URI) {
+  throw new Error("Please add your MONGODB_URI to .env");
+}
+
 
 export async function GET(request: NextRequest) {
+  try {
+    await mongoose.connect(MONGODB_URI);
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+  }
+
+
   const authResult = await verifyApiKey(request)
   if (!authResult.authorized) {
     return NextResponse.json({ error: authResult.error }, { status: 401 })
@@ -67,4 +83,5 @@ export async function POST(request: NextRequest) {
     console.error("[v0] Error writing sensor data:", error)
     return NextResponse.json({ error: "Failed to write sensor data" }, { status: 500 })
   }
+
 }
