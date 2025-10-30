@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { verifyApiKey } from "@/lib/api/auth-middleware"
-import { insertSensorData, getSensorData, getLatestSensorData } from "@/lib/mongodb/queries"
+// import { insertSensorData, getSensorData, getLatestSensorData } from "@/lib/mongodb/queries"
 // import mongoose from "mongoose";
 
 // const MONGODB_URI = process.env.MONGODB_URI!;
