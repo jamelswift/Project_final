@@ -1,22 +1,22 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { verifyApiKey } from "@/lib/api/auth-middleware"
 import { insertSensorData, getSensorData, getLatestSensorData } from "@/lib/mongodb/queries"
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
+// const MONGODB_URI = process.env.MONGODB_URI!;
 
-if (!MONGODB_URI) {
-  throw new Error("Please add your MONGODB_URI to .env");
-}
+// if (!MONGODB_URI) {
+//   throw new Error("Please add your MONGODB_URI to .env");
+// }
 
 
 export async function GET(request: NextRequest) {
-  try {
-    await mongoose.connect(MONGODB_URI);
-    console.log("✅ MongoDB connected");
-  } catch (err) {
-    console.error("❌ MongoDB connection error:", err);
-  }
+  // try {
+  //   await mongoose.connect(MONGODB_URI);
+  //   console.log("✅ MongoDB connected");
+  // } catch (err) {
+  //   console.error("❌ MongoDB connection error:", err);
+  // }
 
 
   const authResult = await verifyApiKey(request)
